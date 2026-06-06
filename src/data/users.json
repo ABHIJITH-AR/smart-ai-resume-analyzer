@@ -1,0 +1,18 @@
+[
+  {
+    "id": "u-1780131953472-355",
+    "name": "ABHIJITH AR",
+    "email": "arabhijith42@gmail.com",
+    "password": "$2b$10$qpN1hHIKK9wZIUDKrNWmteiM27nRfXdMHUxFfbpRXlouMV1QTIbSa",
+    "avatar": "",
+    "createdAt": "2026-05-30T09:05:53.472Z"
+  },
+  {
+    "id": "u-seeded-user-2026",
+    "name": "Abhijith",
+    "email": "abhijith90711@gmail.com",
+    "password": "$2b$10$qpN1hHIKK9wZIUDKrNWmteiM27nRfXdMHUxFfbpRXlouMV1QTIbSa",
+    "avatar": "",
+    "createdAt": "2026-05-30T09:00:00.000Z"
+  }
+]

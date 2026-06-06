@@ -1,0 +1,8 @@
+{
+  "name": "Smart AI Resume Analyzer",
+  "description": "Premium enterprise-grade AI Resume Analyzer providing ATS scoring, skill extraction, and comprehensive optimization suggestions.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
