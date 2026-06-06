@@ -10,19 +10,15 @@ interface LoginProps {
 }
 
 export default function LoginView({ onLoginSuccess, onNavigateToRegister, addToast }: LoginProps) {
-  const [email, setEmail] = useState("abhijith90711@gmail.com");
-  const [password, setPassword] = useState("password123");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   // Load remembered email
   useEffect(() => {
-    const remembered = localStorage.getItem("remembered_email");
-    if (remembered) {
-      setEmail(remembered);
-      setRememberMe(true);
-    }
+    // Keep inputs completely blank on initial mount for a fresh login experience
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {

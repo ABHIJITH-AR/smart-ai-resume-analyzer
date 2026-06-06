@@ -63,20 +63,7 @@ export default function App() {
 
   // Restore authenticated session from memory parameters
   useEffect(() => {
-    const storedToken = localStorage.getItem("auth_token2026");
-    const storedUser = localStorage.getItem("auth_user2026");
-
-    if (storedToken && storedUser) {
-      try {
-        setToken(storedToken);
-        setUser(JSON.parse(storedUser));
-        setIsAuthenticated(true);
-      } catch (err) {
-        localStorage.removeItem("auth_token2026");
-        localStorage.removeItem("auth_user2026");
-      }
-    }
-    
+    // Session is started fresh to ensure clean start on website load
     // Simulate short loader
     setTimeout(() => {
       setIsInitializing(false);
