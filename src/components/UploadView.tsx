@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { UploadCloud, FileText, CheckCircle, AlertTriangle, Sparkles, HelpCircle } from "lucide-react";
+import { UploadCloud, FileText, CheckCircle, AlertTriangle, Sparkles, HelpCircle, X } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { ToastMessage } from "./ToastPopup";
 import { Analysis } from "../types";
@@ -8,9 +8,10 @@ interface UploadProps {
   token: string | null;
   addToast: (type: ToastMessage["type"], title: string, message: string) => void;
   onAnalysisComplete: (analysis: Analysis) => void;
+  onClose?: () => void;
 }
 
-export default function UploadView({ token, addToast, onAnalysisComplete }: UploadProps) {
+export default function UploadView({ token, addToast, onAnalysisComplete, onClose }: UploadProps) {
   const [jobRole, setJobRole] = useState("");
   const [isDragging, setIsDragging] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -149,11 +150,24 @@ export default function UploadView({ token, addToast, onAnalysisComplete }: Uplo
 
   return (
     <div className="max-w-3xl mx-auto space-y-6" id="upload-view-box">
-      <div className="text-center mb-4">
-        <h2 className="text-2xl font-extrabold text-[#F8FAFC]">Upload Resume For AI Review</h2>
-        <p className="text-slate-400 text-sm mt-1">
-          Specify a target job role and parse your resume instantaneously using AI metrics.
-        </p>
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-slate-800 pb-5 mb-4">
+        <div className="text-left">
+          <h2 className="text-2xl font-extrabold text-[#F8FAFC]">Upload Resume For AI Review</h2>
+          <p className="text-slate-400 text-sm mt-1">
+            Specify a target job role and parse your resume instantaneously using AI metrics.
+          </p>
+        </div>
+        {onClose && (
+          <button
+            type="button"
+            onClick={onClose}
+            className="self-start sm:self-center text-xs font-semibold text-slate-400 hover:text-white px-3.5 py-2 bg-slate-900 border border-slate-800 hover:border-slate-705 rounded-xl transition-all flex items-center gap-1.5 cursor-pointer shadow-sm hover:bg-slate-800/60"
+            id="upload-header-close-btn"
+          >
+            <X className="w-4 h-4" />
+            <span>Close view</span>
+          </button>
+        )}
       </div>
 
       {/* Glassmorphic Upload Card */}

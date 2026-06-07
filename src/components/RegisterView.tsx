@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Mail, Lock, User, Eye, EyeOff, Sparkles, Cpu, Check } from "lucide-react";
+import { Mail, Lock, User, Eye, EyeOff, Sparkles, Cpu, Check, X } from "lucide-react";
 import { motion } from "motion/react";
 import { ToastMessage } from "./ToastPopup";
 
@@ -119,12 +119,23 @@ export default function RegisterView({ onNavigateToLogin, addToast }: RegisterPr
                 <input
                   type="text"
                   id="fullname"
-                  className="w-full bg-[#111827]/70 border border-slate-800 rounded-xl pl-10 pr-4 py-2.5 text-[#F8FAFC] text-sm transition-all focus:border-[#4169E1] focus:ring-2 focus:ring-[#4169E1]/20 placeholder:text-slate-600"
+                  className="w-full bg-[#111827]/70 border border-slate-800 rounded-xl pl-10 pr-10 py-2.5 text-[#F8FAFC] text-sm transition-all focus:border-[#4169E1] focus:ring-2 focus:ring-[#4169E1]/20 placeholder:text-slate-600"
                   placeholder="Your Name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   disabled={isLoading}
                 />
+                {name && (
+                  <button
+                    type="button"
+                    onClick={() => setName("")}
+                    className="absolute inset-y-0 right-3 flex items-center text-slate-500 hover:text-slate-300"
+                    title="Clear name field"
+                    id="btn-clear-register-name"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                )}
               </div>
             </div>
 
@@ -139,12 +150,23 @@ export default function RegisterView({ onNavigateToLogin, addToast }: RegisterPr
                 <input
                   type="email"
                   id="register-email"
-                  className="w-full bg-[#111827]/70 border border-slate-800 rounded-xl pl-10 pr-4 py-2.5 text-[#F8FAFC] text-sm transition-all focus:border-[#4169E1] focus:ring-2 focus:ring-[#4169E1]/20 placeholder:text-slate-600"
+                  className="w-full bg-[#111827]/70 border border-slate-800 rounded-xl pl-10 pr-10 py-2.5 text-[#F8FAFC] text-sm transition-all focus:border-[#4169E1] focus:ring-2 focus:ring-[#4169E1]/20 placeholder:text-slate-600"
                   placeholder="your.email@example.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   disabled={isLoading}
                 />
+                {email && (
+                  <button
+                    type="button"
+                    onClick={() => setEmail("")}
+                    className="absolute inset-y-0 right-3 flex items-center text-slate-500 hover:text-slate-300"
+                    title="Clear email field"
+                    id="btn-clear-register-email"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                )}
               </div>
             </div>
 

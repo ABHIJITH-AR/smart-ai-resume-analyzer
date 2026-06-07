@@ -12,7 +12,7 @@ import ProfileView from "./components/ProfileView.tsx";
 import SettingsView from "./components/SettingsView.tsx";
 
 import { motion, AnimatePresence } from "motion/react";
-import { LogOut, RefreshCw, Cpu } from "lucide-react";
+import { LogOut, RefreshCw, Cpu, X, Menu } from "lucide-react";
 
 export default function App() {
   // Session Access States
@@ -25,6 +25,7 @@ export default function App() {
   const [activeTab, setActiveTab] = useState<SidebarTab>("Dashboard");
   const [analyses, setAnalyses] = useState<Analysis[]>([]);
   const [selectedAnalysis, setSelectedAnalysis] = useState<Analysis | null>(null);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   
   // App system states
   const [toasts, setToasts] = useState<ToastMessage[]>([]);
@@ -371,6 +372,7 @@ export default function App() {
               setSelectedAnalysis(completedAnalysis);
               setActiveTab("AI Analysis");
             }}
+            onClose={() => setActiveTab("Dashboard")}
           />
         );
       case "AI Analysis":
@@ -390,6 +392,7 @@ export default function App() {
             onSelectAnalysis={handleSelectAnalysis}
             onDeleteAnalysis={handleDeleteAnalysis}
             onDownloadReport={handleDownloadReport}
+            onClose={() => setActiveTab("Dashboard")}
           />
         );
       case "Profile":
@@ -399,10 +402,11 @@ export default function App() {
             token={token}
             addToast={addToast}
             onProfileUpdate={handleProfileUpdate}
+            onClose={() => setActiveTab("Dashboard")}
           />
         );
       case "Settings":
-        return <SettingsView addToast={addToast} />;
+        return <SettingsView addToast={addToast} onClose={() => setActiveTab("Dashboard")} />;
       default:
         return (
           <div className="p-6 bg-slate-900 border border-slate-800 rounded-xl">
@@ -486,18 +490,32 @@ export default function App() {
         }}
         user={user}
         onLogout={handleLogout}
+        isCollapsed={sidebarCollapsed}
+        onToggleCollapse={() => setSidebarCollapsed(!sidebarCollapsed)}
       />
 
       {/* Main Content Workspace viewport */}
       <main className="flex-grow flex flex-col h-screen overflow-hidden bg-[#0F172A]" id="workspace-viewport">
         {/* Workspace dynamic navigation bar header - conforming to Professional Polish theme */}
         <header className="h-16 px-8 border-b border-slate-800/50 bg-[#0F172A] flex items-center justify-between shrink-0">
-          <div className="flex items-center gap-2">
-            <span className="text-[#94A3B8] text-sm">Pages</span>
-            <span className="text-[#94A3B8] text-sm">/</span>
-            <span className="text-white text-sm font-medium">
-              {activeTab === "History" ? "Reports History" : activeTab}
-            </span>
+          <div className="flex items-center gap-3">
+            {sidebarCollapsed && (
+              <button
+                onClick={() => setSidebarCollapsed(false)}
+                className="p-1.5 bg-slate-900 border border-slate-800 hover:bg-slate-850 hover:border-slate-700 text-slate-400 hover:text-white rounded-lg transition-all cursor-pointer flex items-center justify-center"
+                title="Open Sidebar"
+                id="header-open-sidebar-btn"
+              >
+                <Menu className="w-4 h-4" />
+              </button>
+            )}
+            <div className="flex items-center gap-2">
+              <span className="text-[#94A3B8] text-sm">Pages</span>
+              <span className="text-[#94A3B8] text-sm">/</span>
+              <span className="text-white text-sm font-medium">
+                {activeTab === "History" ? "Reports History" : activeTab}
+              </span>
+            </div>
           </div>
 
           <div className="flex items-center gap-4">

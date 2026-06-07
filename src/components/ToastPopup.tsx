@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { CheckCircle2, AlertTriangle, XCircle, Info } from "lucide-react";
+import { CheckCircle2, AlertTriangle, XCircle, Info, X } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 
 export interface ToastMessage {
@@ -74,10 +74,11 @@ export default function ToastPopup({ toasts, onClose }: ToastProps) {
 
               <button
                 onClick={() => onClose(toast.id)}
-                className="flex-shrink-0 text-slate-500 hover:text-slate-300 transition-colors p-1 rounded-lg hover:bg-slate-800"
+                className="flex-shrink-0 text-slate-400 hover:text-slate-100 transition-colors p-1.5 rounded-lg hover:bg-slate-800"
                 id={`btn-close-toast-${toast.id}`}
+                title="Dismiss"
               >
-                <XCircle className="w-4 h-4" />
+                <X className="w-4 h-4" />
               </button>
             </motion.div>
           );

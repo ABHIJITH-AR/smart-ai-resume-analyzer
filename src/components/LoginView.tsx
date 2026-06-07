@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Mail, Lock, Eye, EyeOff, Sparkles, Cpu, KeyRound, Check } from "lucide-react";
+import { Mail, Lock, Eye, EyeOff, Sparkles, Cpu, KeyRound, Check, X } from "lucide-react";
 import { motion } from "motion/react";
 import { ToastMessage } from "./ToastPopup";
 
@@ -141,12 +141,23 @@ export default function LoginView({ onLoginSuccess, onNavigateToRegister, addToa
                   id="email"
                   name="email-login-field-unique"
                   autoComplete="new-password"
-                  className="w-full bg-[#111827]/70 border border-slate-800 rounded-xl pl-10 pr-4 py-3 text-[#F8FAFC] text-sm transition-all focus:border-[#4169E1] focus:ring-2 focus:ring-[#4169E1]/20 placeholder:text-slate-600"
+                  className="w-full bg-[#111827]/70 border border-slate-800 rounded-xl pl-10 pr-10 py-3 text-[#F8FAFC] text-sm transition-all focus:border-[#4169E1] focus:ring-2 focus:ring-[#4169E1]/20 placeholder:text-slate-600"
                   placeholder="your.email@example.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   disabled={isLoading}
                 />
+                {email && (
+                  <button
+                    type="button"
+                    onClick={() => setEmail("")}
+                    className="absolute inset-y-0 right-3 flex items-center text-slate-500 hover:text-slate-300 transition-colors"
+                    title="Clear email details"
+                    id="btn-clear-email"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                )}
               </div>
             </div>
 
@@ -173,12 +184,23 @@ export default function LoginView({ onLoginSuccess, onNavigateToRegister, addToa
                   id="password"
                   name="password-login-field-unique"
                   autoComplete="new-password"
-                  className="w-full bg-[#111827]/70 border border-slate-800 rounded-xl pl-10 pr-10 py-3 text-[#F8FAFC] text-sm transition-all focus:border-[#4169E1] focus:ring-2 focus:ring-[#4169E1]/20 placeholder:text-slate-600"
+                  className="w-full bg-[#111827]/70 border border-slate-800 rounded-xl pl-10 pr-16 py-3 text-[#F8FAFC] text-sm transition-all focus:border-[#4169E1] focus:ring-2 focus:ring-[#4169E1]/20 placeholder:text-slate-600"
                   placeholder="••••••••••••"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   disabled={isLoading}
                 />
+                {password && (
+                  <button
+                    type="button"
+                    onClick={() => setPassword("")}
+                    className="absolute inset-y-0 right-9 flex items-center text-slate-500 hover:text-slate-300"
+                    title="Clear password details"
+                    id="btn-clear-password"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                )}
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}

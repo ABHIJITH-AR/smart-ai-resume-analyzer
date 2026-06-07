@@ -63,7 +63,6 @@ export default function DashboardView({
         <div>
           <h2 className="text-2xl font-bold mb-1 text-[#F8FAFC] flex items-center gap-1.5 flex-wrap">
             <span>Welcome back, {user.name || "Alex"}!</span>
-            <BadgeCheck className="w-5.5 h-5.5 text-blue-500 fill-blue-500/10 shrink-0" title="Verified AI Professional" />
           </h2>
           <p className="text-[#94A3B8] text-sm font-light">Your AI Resume Analysis overview for the last 30 days.</p>
         </div>

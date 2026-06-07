@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import { Settings, Shield, KeyRound, Cpu, HelpCircle, Save, Check } from "lucide-react";
+import { Settings, Shield, KeyRound, Cpu, HelpCircle, Save, Check, X } from "lucide-react";
 import { ToastMessage } from "./ToastPopup";
 
 interface SettingsViewProps {
   addToast: (type: ToastMessage["type"], title: string, message: string) => void;
+  onClose?: () => void;
 }
 
-export default function SettingsView({ addToast }: SettingsViewProps) {
+export default function SettingsView({ addToast, onClose }: SettingsViewProps) {
   const [useLiveAI, setUseLiveAI] = useState(true);
   const [modelType, setModelType] = useState("gemini-3.5-flash");
   const [exportFormat, setExportFormat] = useState("PDF");
@@ -30,11 +31,24 @@ export default function SettingsView({ addToast }: SettingsViewProps) {
 
   return (
     <div className="max-w-3xl mx-auto space-y-6" id="settings-view-box">
-      <div>
-        <h2 className="text-2xl font-extrabold text-[#F8FAFC]">System Preferences</h2>
-        <p className="text-slate-400 text-sm mt-1">
-          Configure backend models, database linkages, and export parameters.
-        </p>
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-slate-800 pb-5 mb-4">
+        <div className="text-left">
+          <h2 className="text-2xl font-extrabold text-[#F8FAFC]">System Preferences</h2>
+          <p className="text-slate-400 text-sm mt-1">
+            Configure backend models, database linkages, and export parameters.
+          </p>
+        </div>
+        {onClose && (
+          <button
+            type="button"
+            onClick={onClose}
+            className="self-start sm:self-center text-xs font-semibold text-slate-400 hover:text-white px-3.5 py-2 bg-slate-900 border border-slate-800 hover:border-slate-705 rounded-xl transition-all flex items-center gap-1.5 cursor-pointer shadow-sm hover:bg-slate-800/60"
+            id="settings-header-close-btn"
+          >
+            <X className="w-4 h-4" />
+            <span>Close view</span>
+          </button>
+        )}
       </div>
 
       <div className="bg-[#1E293B] border border-slate-800 rounded-2xl p-6 shadow-md">

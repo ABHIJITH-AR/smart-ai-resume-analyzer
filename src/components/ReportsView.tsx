@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FileText, Download, Trash2, Calendar, Search, Sparkles, Filter } from "lucide-react";
+import { FileText, Download, Trash2, Calendar, Search, Sparkles, Filter, X } from "lucide-react";
 import { Analysis } from "../types";
 
 interface ReportsViewProps {
@@ -7,6 +7,7 @@ interface ReportsViewProps {
   onSelectAnalysis: (analysis: Analysis) => void;
   onDeleteAnalysis: (id: string) => void;
   onDownloadReport: (analysis: Analysis) => void;
+  onClose?: () => void;
 }
 
 export default function ReportsView({
@@ -14,6 +15,7 @@ export default function ReportsView({
   onSelectAnalysis,
   onDeleteAnalysis,
   onDownloadReport,
+  onClose,
 }: ReportsViewProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [roleFilter, setRoleFilter] = useState("All");
@@ -38,11 +40,22 @@ export default function ReportsView({
 
   return (
     <div className="space-y-6" id="reports-view-box">
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div>
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-slate-800 pb-5 mb-4">
+        <div className="text-left">
           <h2 className="text-2xl font-extrabold text-[#F8FAFC]">Analytical Archives</h2>
           <p className="text-slate-400 text-sm mt-1">Review historic uploads and download PDF appraisals.</p>
         </div>
+        {onClose && (
+          <button
+            type="button"
+            onClick={onClose}
+            className="self-start sm:self-center text-xs font-semibold text-[#94A3B8] hover:text-white px-3.5 py-2 bg-slate-900 border border-slate-800 hover:border-slate-705 rounded-xl transition-all flex items-center gap-1.5 cursor-pointer shadow-sm hover:bg-slate-800/60"
+            id="reports-header-close-btn"
+          >
+            <X className="w-4 h-4" />
+            <span>Close view</span>
+          </button>
+        )}
       </div>
 
       {/* Solid Search and Filter Module (No glassmorphism) */}
